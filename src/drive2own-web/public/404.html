@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Drive2Own</title>
+    <script type="text/javascript">
+      // Single-page app redirect for GitHub Pages.
+      // Encodes the current path into a query string so index.html can restore it
+      // after React boots, allowing deep-links to work on a static host.
+      //
+      // pathSegmentsToKeep = 1 preserves the repository name segment (/drive2own)
+      // so the redirect lands at https://nithinnampalli.github.io/drive2own/?/…
+      var pathSegmentsToKeep = 1; // 1 = keep the /drive2own repo-name segment
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
