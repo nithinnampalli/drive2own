@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Drive2Own.Mobile.Views.DashboardPage"
+             Title="Dashboard">
+
+    <RefreshView Command="{Binding LoadDashboardCommand}" IsRefreshing="{Binding IsBusy}">
+        <ScrollView>
+            <VerticalStackLayout Padding="16" Spacing="16">
+                <Label Text="{Binding WelcomeMessage}" FontSize="22" FontAttributes="Bold" TextColor="#2d3748" />
+
+                <!-- Stats Grid -->
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="True">
+                        <VerticalStackLayout HorizontalOptions="Center">
+                            <Label Text="🛣️" FontSize="32" HorizontalOptions="Center"/>
+                            <Label Text="{Binding DashboardData.TotalRoutes}" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Text="Routes" FontSize="13" TextColor="#718096" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="True">
+                        <VerticalStackLayout HorizontalOptions="Center">
+                            <Label Text="📍" FontSize="32" HorizontalOptions="Center"/>
+                            <Label Text="{Binding DashboardData.TotalPins}" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Text="Pins" FontSize="13" TextColor="#718096" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="True">
+                        <VerticalStackLayout HorizontalOptions="Center">
+                            <Label Text="📏" FontSize="32" HorizontalOptions="Center"/>
+                            <Label Text="{Binding TotalDistance}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Text="Distance" FontSize="13" TextColor="#718096" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="True">
+                        <VerticalStackLayout HorizontalOptions="Center">
+                            <Label Text="⏱️" FontSize="32" HorizontalOptions="Center"/>
+                            <Label Text="{Binding TotalDuration}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Text="Duration" FontSize="13" TextColor="#718096" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+                <!-- Recent Routes -->
+                <Label Text="Recent Routes" FontSize="18" FontAttributes="Bold" Margin="0,8,0,0"/>
+                <CollectionView ItemsSource="{Binding RecentRoutes}" EmptyView="No routes yet. Start tracking!">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Margin="0,4" CornerRadius="10" Padding="14" HasShadow="True" BackgroundColor="White">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <Label Grid.Column="0" Text="🚗" FontSize="24" VerticalOptions="Center" Margin="0,0,12,0"/>
+                                    <VerticalStackLayout Grid.Column="1">
+                                        <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="15"/>
+                                        <Label Text="{Binding StartedAt, StringFormat='{0:MMM dd, yyyy}'}" FontSize="12" TextColor="#718096"/>
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="2" Text="{Binding DistanceMeters, StringFormat='{0:F0} m'}" FontSize="13" TextColor="#4CAF50" VerticalOptions="Center"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+
+</ContentPage>
