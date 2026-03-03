@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Drive2Own.Mobile.ViewModels"
+             x:Class="Drive2Own.Mobile.Views.LoginPage"
+             Title="Drive2Own"
+             BackgroundColor="#1a2332">
+
+    <Grid VerticalOptions="Center" Padding="32">
+        <VerticalStackLayout Spacing="16">
+            <Label Text="🗺️" FontSize="64" HorizontalOptions="Center" />
+            <Label Text="Drive2Own" FontSize="32" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" />
+            <Label Text="Track your journeys" FontSize="16" TextColor="#a0aec0" HorizontalOptions="Center" Margin="0,0,0,24" />
+
+            <Label Text="{Binding ErrorMessage}" TextColor="#fc8181" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringToBoolConverter}}" />
+
+            <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" BackgroundColor="#2d4a6b" TextColor="White" PlaceholderColor="#718096" />
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" BackgroundColor="#2d4a6b" TextColor="White" PlaceholderColor="#718096" />
+
+            <Button Text="Sign In" Command="{Binding LoginCommand}" IsEnabled="{Binding IsBusy, Converter={StaticResource InvertBoolConverter}}"
+                    BackgroundColor="#4CAF50" TextColor="White" CornerRadius="8" HeightRequest="48" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="#4CAF50" IsVisible="{Binding IsBusy}" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                <Label Text="Don't have an account?" TextColor="#a0aec0" />
+                <Label Text="Register" TextColor="#4CAF50" FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToRegisterCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

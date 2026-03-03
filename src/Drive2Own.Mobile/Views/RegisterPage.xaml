@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Drive2Own.Mobile.Views.RegisterPage"
+             Title="Create Account"
+             BackgroundColor="#1a2332">
+
+    <Grid VerticalOptions="Center" Padding="32">
+        <VerticalStackLayout Spacing="16">
+            <Label Text="🗺️" FontSize="64" HorizontalOptions="Center" />
+            <Label Text="Create Account" FontSize="28" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" Margin="0,0,0,16"/>
+
+            <Label Text="{Binding ErrorMessage}" TextColor="#fc8181" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringToBoolConverter}}" />
+
+            <Entry Placeholder="Display Name" Text="{Binding DisplayName}" BackgroundColor="#2d4a6b" TextColor="White" PlaceholderColor="#718096" />
+            <Entry Placeholder="Username" Text="{Binding Username}" BackgroundColor="#2d4a6b" TextColor="White" PlaceholderColor="#718096" />
+            <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" BackgroundColor="#2d4a6b" TextColor="White" PlaceholderColor="#718096" />
+            <Entry Placeholder="Password (min 6 chars)" Text="{Binding Password}" IsPassword="True" BackgroundColor="#2d4a6b" TextColor="White" PlaceholderColor="#718096" />
+
+            <Button Text="Create Account" Command="{Binding RegisterCommand}" IsEnabled="{Binding IsBusy, Converter={StaticResource InvertBoolConverter}}"
+                    BackgroundColor="#4CAF50" TextColor="White" CornerRadius="8" HeightRequest="48" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="#4CAF50" IsVisible="{Binding IsBusy}" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                <Label Text="Already have an account?" TextColor="#a0aec0" />
+                <Label Text="Sign In" TextColor="#4CAF50" FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToLoginCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

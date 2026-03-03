@@ -1,0 +1,25 @@
+## .NET
+*.user
+*.suo
+*.vs/
+[Bb]in/
+[Oo]bj/
+*.db
+*.db-shm
+*.db-wal
+.DS_Store
+
+## Build artifacts
+src/Drive2Own.Api/bin/
+src/Drive2Own.Api/obj/
+src/Drive2Own.Mobile/bin/
+src/Drive2Own.Mobile/obj/
+
+## React web
+src/drive2own-web/node_modules/
+src/drive2own-web/build/
+
+## Environment
+.env
+.env.local
+appsettings.Production.json

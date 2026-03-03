@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Drive2Own.Mobile.Views.TrackingPage"
+             Title="Track Route">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+            <!-- Route Setup -->
+            <Frame BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="True" IsVisible="{Binding IsTracking, Converter={StaticResource InvertBoolConverter}}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="New Route" FontSize="18" FontAttributes="Bold"/>
+                    <Entry Placeholder="Route name" Text="{Binding RouteName}" />
+                    <Picker Title="Travel Mode" ItemsSource="{Binding TravelModes}" SelectedItem="{Binding SelectedMode}" />
+                    <Button Text="▶ Start Tracking" Command="{Binding StartTrackingCommand}"
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="8" HeightRequest="48" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Active Tracking -->
+            <Frame BackgroundColor="#fff3cd" CornerRadius="12" Padding="16" HasShadow="True" IsVisible="{Binding IsTracking}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="{Binding TrackingStatus}" FontSize="16" FontAttributes="Bold" TextColor="#856404"/>
+
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                        <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
+                            <Label Text="{Binding Distance}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Text="Distance" FontSize="12" TextColor="#718096" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                            <Label Text="{Binding Duration}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Text="Duration" FontSize="12" TextColor="#718096" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+                            <Label Text="{Binding PointCount}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Text="GPS Points" FontSize="12" TextColor="#718096" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Label Text="{Binding CurrentLatitude, StringFormat='Lat: {0:F6}'}" FontSize="13" TextColor="#718096"/>
+                    <Label Text="{Binding CurrentLongitude, StringFormat='Lon: {0:F6}'}" FontSize="13" TextColor="#718096"/>
+
+                    <Button Text="⏹ Stop &amp; Save" Command="{Binding StopTrackingCommand}"
+                            BackgroundColor="#f44336" TextColor="White" CornerRadius="8" HeightRequest="48"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Status -->
+            <Label Text="{Binding TrackingStatus}" FontSize="14" TextColor="#718096" HorizontalOptions="Center" IsVisible="{Binding IsTracking, Converter={StaticResource InvertBoolConverter}}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
